@@ -13,7 +13,7 @@ const App = () => {
       <div>
         <h3>Maybe friends?</h3>
         {/*
-          TODO: show uniq view seconds, and pls use <Loading /> and <Error />
+          TODO: please show people who may be friends, and use <Loading /> and <Error />.
         
           you can get date from the below endpoint:
           https://private-e843bc-betamindhiring.apiary-mock.com/users/1/maybe_friends
