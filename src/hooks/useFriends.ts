@@ -40,16 +40,3 @@ export const useFriends = () => {
 
   return { users, loading };
 };
-
-// build URL
-// => candidates couldn't consider clearn logic for building URL.
-// => We should check if they can consider clearn/simple/maintenabile logic.
-
-// Fetch with best practice
-// => Candidates tend to loose dependencies.
-// => We should check if they can manage depedencies correctly.
-
-// Managw state loading error
-// => candidates don't know error's type itself.
-// => they couldn't get "error.message" from "error" correcly.
-// => We should check if they can get message from error objs correctly.
