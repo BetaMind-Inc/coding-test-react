@@ -40,3 +40,10 @@
 .read-the-docs {
   color: #888;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  margin-top: 2em;
+}

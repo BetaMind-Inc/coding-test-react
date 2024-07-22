@@ -1,23 +1,21 @@
 import Logo from "/logo.svg";
 import "./App.css";
-import Error from "./components/Error";
-import Loading from "./components/Loading";
+import { useFriends } from "./hooks/useFriends";
+// import { Error } from "./components/Error";
+import { Loading } from "./components/Loading";
 
 /**
  * TODO:
- * 1. Create Custom hook is call useFriends with these features:
- *   - Fetch data from endpoint
- *   - Pagination with data from endpoint
- *   - Support search via api
- *   => Here is 2 endpoint you can use:
- *   - https://dummyjson.com/users?limit=5&skip=0&select=id,firstName,lastName,maidenName,age
- *   - https://dummyjson.com/users/search?q=ann&limit=5&skip=0&select=id,firstName,lastName,maidenName,age
- * 2. Create Friends component and apply above custom hook, and use <Loading /> and <Error /> components:
+ * 1. Show error message by using <Error /> component:
+ *   - Enhance useFriends hook to support error handling
+ * 2. Change to be able to paginate friends list:
+ *   - Enhance useFriends hook to support pagination
  *   - Show list of friends with 2 button Next, Previous for pagination
- *   - Show search input for searching friends
  */
 
 const App = () => {
+  const { users, loading } = useFriends();
+
   return (
     <>
       <div>
@@ -26,7 +24,17 @@ const App = () => {
       <h1>Social Network App</h1>
       <div>
         <h3>friends?</h3>
-        {/* Please add Friends Component, Error and Loading here */}
+        {loading && <Loading />}
+        <div className="friends">
+          {users.map((user) => (
+            <p key={user.id}>{`${user.firstName} ${user.lastName}`}</p>
+          ))}
+        </div>
+
+        <div className="pagination">
+          <button>Prev</button>
+          <button>Next</button>
+        </div>
       </div>
     </>
   );

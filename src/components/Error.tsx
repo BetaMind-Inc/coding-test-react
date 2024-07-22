@@ -1,3 +1,3 @@
 export const Error = (message: string) => {
-  return <p>{message}</p>;
+  return <p>{`Error happens... ${message}`}</p>;
 };
