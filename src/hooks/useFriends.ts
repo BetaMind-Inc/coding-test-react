@@ -32,7 +32,6 @@ export const useFriends = () => {
       );
       setUsers(users);
       setLoading(false);
-      console.log(users);
     };
 
     fetchData();
