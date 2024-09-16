@@ -1,7 +1,11 @@
 import Logo from "/logo.svg";
 import "./App.css";
-import { Error } from "./components/Error";
-import { Loading } from "./components/Loading";
+import {Error} from "./components/Error";
+import {Loading} from "./components/Loading";
+import {useState} from 'react';
+import {UseFriends} from "./hooks/Friends.tsx";
+import {FriendEntity} from "./entities/friends.entity.ts";
+
 /**
  * TODO:
  * 1. Create Custom hook is call useFriends with these features:
@@ -16,22 +20,42 @@ import { Loading } from "./components/Loading";
  */
 
 const App = () => {
-  return (
-    <>
-      <div>
-        <img src={Logo} className="logo" alt="logo" />
-      </div>
-      <h1>Social Network App</h1>
-      <div>
-        <h3>friends?</h3>
-        {/* load list friend heres */}
-        <div className="pagination">
-          <button>Prev</button>
-          <button>Next</button>
-        </div>
-      </div>
-    </>
-  );
+    const [currentPage, setCurrentPage] = useState(1)
+
+    const GetPrevPage = (page: number): number => {
+        const dataPage = page - 1
+        if (dataPage < 1) {
+            return page
+        }
+        return page - 1;
+    }
+
+    const result = UseFriends(currentPage)
+    return (
+        <>
+            <div>
+                <img src={Logo} className="logo" alt="logo"/>
+            </div>
+            <h1>Social Network App</h1>
+            <div>
+                <h3>friends?</h3>
+                { result.isLoading ? <Loading /> : result.friends.map((friend : FriendEntity) => {
+                    return (
+                        <div key={friend.id}>
+                            <div>{ friend.firstName + ' ' + friend.lastName } - { friend.age }</div>
+                        </div>
+                    );
+                }) }
+
+                { result.error && <Error message={result.error} />}
+
+                <div className="pagination">
+                    {currentPage > 1 && <button onClick={() => setCurrentPage(GetPrevPage(currentPage))}>Prev</button>}
+                    <button onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
+                </div>
+            </div>
+        </>
+    );
 };
 
 export default App;
